@@ -184,11 +184,22 @@
     </div>
 
     <div class="admin-link">
-      <a href="admin.html">Accès administrateur</a>
+      <a href="#" onclick="accessAdmin(event)">Accès administrateur</a>
     </div>
   </div>
 
   <script>
+    // Admin password protection
+    function accessAdmin(e) {
+      e.preventDefault();
+      const password = prompt('Entrez le mot de passe administrateur :');
+      if (password === 'AgNc1665201!') {
+        window.location.href = 'admin.html';
+      } else if (password !== null) {
+        alert('Mot de passe incorrect !');
+      }
+    }
+
     // Storage key for registrations
     const STORAGE_KEY = 'potluck_registrations';
 
