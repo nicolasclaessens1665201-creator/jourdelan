@@ -1,0 +1,45 @@
+
+:root{--accent:#c62828;--accent2:#ffb74d;--muted:#666}
+body{font-family:Inter, 'Segoe UI', Roboto, Arial, sans-serif;margin:0;padding:0;background:linear-gradient(180deg,#fff7e6 0%, #fff 40%);color:#111}
+header{background:linear-gradient(90deg,var(--accent), #f06292);color:#fff;padding:18px 20px;text-align:center}
+header h1{margin:0;font-size:22px}
+.tagline{margin:6px 0 0 0;opacity:0.95}
+nav{margin-top:10px}
+nav button{margin:6px 6px;padding:8px 12px;border-radius:999px;border:none;background:rgba(255,255,255,0.9);color:#222;cursor:pointer;font-weight:600}
+main{padding:20px;max-width:1000px;margin:0 auto}
+.tab.hidden{display:none}
+#participants-list{list-style:none;padding:0;margin-top:12px}
+.participant-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;background:linear-gradient(180deg,#fff,#fff7f0);border:1px solid #ffe0b2;margin-bottom:8px}
+.participant-item .controls button{margin-left:6px;background:transparent;border:none;cursor:pointer;font-size:16px}
+.participant-item span{font-weight:600}
+.dish-card{background:linear-gradient(180deg,#fff,#fff8f5);border:1px solid #ffd54f;padding:14px;margin-bottom:12px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.dish-card h3{margin:0 0 8px 0;color:#b71c1c}
+.dish-card p{margin:0}
+.dish-card ul{list-style:none;padding-left:0;margin-top:8px}
+.dish-card ul li{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
+.dish-card ul li button{background:transparent;border:none;color:#c62828;cursor:pointer}
+.join-controls{display:flex;gap:8px;align-items:center;margin-top:10px}
+select{padding:8px;border-radius:8px;border:1px solid #ffd54f;background:white}
+button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer}
+button[disabled]{opacity:0.6;cursor:not-allowed}
+form input{padding:8px;border-radius:8px;border:1px solid #ffd54f;margin-right:8px}
+.compact-form{display:flex;gap:8px;align-items:center}
+
+.totals{margin-top:10px;padding:8px;border-radius:8px;background:linear-gradient(90deg,rgba(255,255,255,0.7),rgba(255,235,205,0.7));display:inline-block;font-weight:700}
+
+.compact-form input[type="number"]{width:120px}
+.modal-body input[type="number"]{width:100%}
+
+footer{padding:12px;text-align:center;color:var(--muted);font-size:13px}
+
+/* Modal styles */
+.modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);visibility:hidden;opacity:0;transition:opacity .18s ease, visibility .18s}
+.modal-overlay.open{visibility:visible;opacity:1}
+.modal{background:white;padding:18px;border-radius:12px;max-width:420px;width:90%;box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+.modal h3{margin:0 0 8px 0;color:var(--accent)}
+.modal-body{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.modal-body label{font-size:13px;color:#444}
+.modal-body input{padding:8px;border-radius:8px;border:1px solid #eee}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.modal-actions .cancel{background:transparent;color:#555;border:1px solid #eee;padding:8px 12px;border-radius:8px}
+.modal-actions .save{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none}

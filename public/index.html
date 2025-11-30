@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Potluck - Jour de l'an</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>🎉 Potluck - Jour de l'an</h1>
+    <p class="tagline">Apportez un plat, partageons la fête !</p>
+    <nav>
+      <button id="tab-participants">Participants</button>
+      <button id="tab-dishes">Plats</button>
+    </nav>
+    <div id="totals" class="totals" aria-live="polite">Total personnes: 0 (adultes : 0 — enfants de 12 ans et moins : 0)</div>
+  </header>
+
+  <main>
+    <section id="participants-section" class="tab">
+      <h2>Liste des participants</h2>
+      <form id="participant-form" class="compact-form">
+        <input id="participant-name" placeholder="Nom du participant" aria-label="Nom du participant" required />
+        <input id="participant-adults" type="number" min="0" value="1" aria-label="Personnes 12 ans et plus" />
+        <input id="participant-children" type="number" min="0" value="0" aria-label="Personnes 12 ans et moins" />
+        <button type="submit">Ajouter</button>
+      </form>
+      <ul id="participants-list"></ul>
+    </section>
+
+    <section id="dishes-section" class="tab hidden">
+      <h2>Plats et qui apporte quoi</h2>
+      <form id="dish-form" class="compact-form">
+        <input id="dish-name" placeholder="Nom du plat" aria-label="Nom du plat" required />
+        <input id="dish-max" type="number" min="1" value="1" aria-label="Nombre max de personnes" required />
+        <button type="submit">Ajouter le plat</button>
+      </form>
+
+      <div id="dishes-list"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+  
+  <!-- Participant Edit Modal -->
+  <div id="participant-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+      <h3 id="pm-title">Éditer le participant</h3>
+      <div class="modal-body">
+        <label>Nom</label>
+        <input id="pm-name" type="text" />
+        <label>Personnes 12 ans et plus</label>
+        <input id="pm-adults" type="number" min="0" value="1" />
+        <label>Personnes 12 ans et moins</label>
+        <input id="pm-children" type="number" min="0" value="0" />
+      </div>
+      <div class="modal-actions">
+        <button class="cancel">Annuler</button>
+        <button class="save">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dish Edit Modal -->
+  <div id="dish-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dm-title">
+      <h3 id="dm-title">Éditer le plat</h3>
+      <div class="modal-body">
+        <label>Nom du plat</label>
+        <input id="dm-name" type="text" />
+        <label>Nombre maximum de personnes</label>
+        <input id="dm-max" type="number" min="1" />
+      </div>
+      <div class="modal-actions">
+        <button class="cancel">Annuler</button>
+        <button class="save">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

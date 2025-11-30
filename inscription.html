@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - Potluck Jour de l'an</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 500px;
+      width: 100%;
+      padding: 40px;
+      animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      color: #667eea;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .emoji {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    input[type="number"] {
+      width: 150px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .success-message {
+      display: none;
+      background: #4caf50;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .success-message.show {
+      display: block;
+    }
+    .info {
+      background: #f0f4ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .admin-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+    }
+    .admin-link a {
+      color: #667eea;
+      text-decoration: none;
+    }
+    .admin-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji">🎉🎊</div>
+    <h1>Potluck - Jour de l'an</h1>
+    <p class="subtitle">Inscrivez-vous à notre célébration !</p>
+    
+    <div class="info">
+      📅 <strong>Date :</strong> 1er Janvier 2026 de 10:00 à 18:00<br>
+      📍 <strong>Lieu :</strong> Chez Amélie<br>Salle de réception¸<br>1665 Av. Victoria<br>Saint-Lambert<br>J4R 2T6<br>
+      🍽️ <strong>Format :</strong> Potluck - 
+    </div>
+
+    <form id="registration-form">
+      <div class="form-group">
+        <label for="name">Votre nom *</label>
+        <input 
+          type="text" 
+          id="name" 
+          placeholder="Ex: Marie Dupont" 
+          required
+          autocomplete="name"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="adults">Nombre d'adultes (12 ans et +) *</label>
+        <input 
+          type="number" 
+          id="adults" 
+          min="0" 
+          value="1" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="children">Nombre d'enfants (12 ans et moins)</label>
+        <input 
+          type="number" 
+          id="children" 
+          min="0" 
+          value="0"
+        >
+      </div>
+
+      <button type="submit">S'inscrire maintenant</button>
+    </form>
+
+    <div class="success-message" id="success-message">
+      ✅ Merci pour votre inscription ! Nous avons hâte de vous voir !
+    </div>
+
+    <div class="admin-link">
+      <a href="admin.html">Accès administrateur</a>
+    </div>
+  </div>
+
+  <script>
+    // Storage key for registrations
+    const STORAGE_KEY = 'potluck_registrations';
+
+    // Load existing registrations
+    function getRegistrations() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    }
+
+    // Save registration
+    function saveRegistration(registration) {
+      const registrations = getRegistrations();
+      registration.id = Date.now().toString();
+      registration.timestamp = new Date().toISOString();
+      registrations.push(registration);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(registrations));
+    }
+
+    // Handle form submission
+    document.getElementById('registration-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const adults = parseInt(document.getElementById('adults').value) || 0;
+      const children = parseInt(document.getElementById('children').value) || 0;
+
+      if (!name) {
+        alert('Veuillez entrer votre nom');
+        return;
+      }
+
+      if (adults === 0 && children === 0) {
+        alert('Veuillez indiquer au moins une personne');
+        return;
+      }
+
+      // Check for duplicate
+      const registrations = getRegistrations();
+      const duplicate = registrations.find(r => r.name.toLowerCase() === name.toLowerCase());
+      
+      if (duplicate) {
+        if (!confirm(`Une inscription existe déjà pour "${name}". Voulez-vous la mettre à jour ?`)) {
+          return;
+        }
+        // Remove old entry
+        const filtered = registrations.filter(r => r.name.toLowerCase() !== name.toLowerCase());
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+      }
+
+      // Save registration
+      saveRegistration({ name, adults, children });
+
+      // Show success message
+      const successMsg = document.getElementById('success-message');
+      successMsg.classList.add('show');
+
+      // Reset form
+      document.getElementById('registration-form').reset();
+      document.getElementById('adults').value = '1';
+      document.getElementById('children').value = '0';
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMsg.classList.remove('show');
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
